@@ -1,0 +1,12 @@
+{
+    "name": "todo-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "deploy": "npm run build --prefix client && npm start --prefix server"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
