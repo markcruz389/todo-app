@@ -4,8 +4,12 @@ const getTodos = async () => {
     return await todos.find({}, { __v: 0 });
 };
 
-const addTodo = async (todo: string, deadline: Date): Promise<ITodo> => {
-    const newTodo = await todos.create({ todo, deadline });
+const addTodo = async (
+    todo: string,
+    deadline: Date | undefined
+): Promise<ITodo> => {
+    const data = { todo, ...(deadline && { deadline: new Date(deadline) }) };
+    const newTodo = await todos.create(data);
     return { id: newTodo.id, todo, deadline };
 };
 

@@ -10,6 +10,7 @@ const httpGetTodos = async (req: Request, res: Response) => {
 
 const httpAddTodo = async (req: Request, res: Response) => {
     const { todo, deadline } = req.body;
+
     const newTodo = await addTodo(todo, deadline);
 
     return res.status(201).json(newTodo);

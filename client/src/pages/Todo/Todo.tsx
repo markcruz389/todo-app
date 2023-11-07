@@ -1,7 +1,7 @@
 import TodoForm from "./TodoForm/TodoForm";
 import TodoList from "./TodoList/TodoList";
 
-import TodosProvider from "./TodosContext";
+import TodosProvider from "../../contexts/TodosContext";
 
 function Todo() {
     return (
