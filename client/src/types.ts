@@ -1,6 +1,6 @@
 export interface ITodo {
     id: string;
     todo: string;
-    deadline?: Date;
-    completedDate: Date;
+    deadline: string | null;
+    completedDate: string | null;
 }

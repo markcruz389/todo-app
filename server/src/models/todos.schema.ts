@@ -1,9 +1,12 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-export interface ITodo {
+export interface ITodo extends Document {
     id: string;
     todo: string;
-    deadline?: Date;
+    deadline: Date | null;
+    completedDate: Date | null;
+    createdDate: Date;
+    isDeleted: boolean;
 }
 
 const schema = new Schema<ITodo>(
@@ -13,7 +16,19 @@ const schema = new Schema<ITodo>(
             required: true,
         },
         deadline: {
-            date: Date,
+            type: Date,
+            default: null,
+        },
+        completedDate: {
+            type: Date,
+            default: null,
+        },
+        createdDate: {
+            type: Date,
+        },
+        isDeleted: {
+            type: Boolean,
+            default: false,
         },
     },
     {

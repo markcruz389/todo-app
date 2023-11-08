@@ -9,8 +9,8 @@ const TodoList = () => {
 
     return (
         <ol>
-            {todos.map((todo, index) => (
-                <TodoItem key={index} index={index} todo={todo} />
+            {todos.map((todo) => (
+                <TodoItem key={todo.id} todo={todo} />
             ))}
         </ol>
     );

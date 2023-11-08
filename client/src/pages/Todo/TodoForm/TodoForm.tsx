@@ -39,6 +39,10 @@ const TodoForm = () => {
     });
     const [error, setError] = useState(false);
 
+    const resetForm = () => {
+        setFormInput({ todo: "", deadline: "" });
+    };
+
     const handleChange = (name: string, value: string) => {
         setFormInput({ ...formInput, [name]: value });
     };
@@ -57,10 +61,14 @@ const TodoForm = () => {
         }
 
         setTodos((prev) => [...prev, newTodo]);
+        resetForm();
     };
 
     return (
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form
+            className="bg-white shadow-md rounded p-4"
+            onSubmit={(e) => handleSubmit(e)}
+        >
             <TextInput
                 label="Todo"
                 name="todo"
