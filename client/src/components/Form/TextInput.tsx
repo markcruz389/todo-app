@@ -32,7 +32,9 @@ const TextInput = ({
                 value={value}
                 onChange={(e) => handleChange(name, e.target.value)}
             />
-            {error && <p>Todo is required</p>}
+            {error && (
+                <p className="text-rose-400 italic mt-1">Todo is required</p>
+            )}
         </div>
     );
 };

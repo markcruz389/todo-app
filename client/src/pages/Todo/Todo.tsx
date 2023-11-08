@@ -5,12 +5,12 @@ import TodosProvider from "../../contexts/TodosContext";
 
 function Todo() {
     return (
-        <div className="h-screen p-10 grid grid-cols-2 gap-5 items-center">
+        <div className="h-screen items-center md:p-10 md:grid md:grid-cols-2 md:gap-5 ">
             <TodosProvider>
-                <div className="p-[100px]">
+                <div className="p-5 md:p-[75px]">
                     <TodoForm />
                 </div>
-                <div>
+                <div className="p-5 md:p-0">
                     <TodoList />
                 </div>
             </TodosProvider>

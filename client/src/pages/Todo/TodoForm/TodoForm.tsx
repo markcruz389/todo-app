@@ -41,6 +41,7 @@ const TodoForm = () => {
 
     const resetForm = () => {
         setFormInput({ todo: "", deadline: "" });
+        setError(false);
     };
 
     const handleChange = (name: string, value: string) => {

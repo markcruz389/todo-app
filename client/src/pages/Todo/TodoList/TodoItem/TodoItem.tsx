@@ -97,7 +97,7 @@ const TodoItem = ({ todo }: Props) => {
     };
 
     return (
-        <li className="p-2 m-1 grid grid-cols-2 items-center border-2">
+        <li className="p-2 m-1 border-2 md:grid md:grid-cols-2 md:items-center ">
             <div>
                 <p>
                     <strong>Todo: </strong>
