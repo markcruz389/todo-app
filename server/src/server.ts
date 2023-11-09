@@ -6,13 +6,12 @@ import { mongoConnect } from "./services/mongo";
 
 dotenv.config();
 
-const PORT = process.env.PORT;
-const MONGO_URL = process.env.MONGO_URL;
+const PORT = process.env.NODE_DOCKER_PORT || 8080;
 
 const server = http.createServer(app);
 
 async function startServer() {
-    await mongoConnect(MONGO_URL);
+    await mongoConnect();
     server.listen(PORT, () => console.log(`Listening to port ${PORT}...`));
 }
 

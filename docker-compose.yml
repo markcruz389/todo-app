@@ -1,0 +1,96 @@
+# version: "2"
+# services:
+#     client:
+#         image: todoapp-client
+#         restart: always
+#         ports:
+#             - "3000:3000"
+#         working_dir: /client/src
+#         volumes:
+#             - ./client:/client/src
+#             - /client/node_modules
+#         entrypoint: ["npm", "start"]
+#         links:
+#             - server
+#         networks:
+#             - todoappnetwork
+#     server:
+#         image: todoapp-server
+#         restart: always
+#         ports:
+#             - "9000:9000"
+#         volumes:
+#             - ./server:/server
+#             - /server/node_modules
+#         depends_on:
+#             - mongodb
+#         networks:
+#             - todoappnetwork
+#     mongodb:
+#         image: mongo
+#         restart: always
+#         container_name: mongodb
+#         volumes:
+#             - ./data-node:/data/db
+#         ports:
+#             - 27017:27017
+#         command: mongod --noauth --smallfiles
+#         networks:
+#             - todoappnetwork
+# networks:
+#     todoappnetwork:
+#         driver: bridge
+version: "3.8"
+
+services:
+    mongodb:
+        image: mongo:5.0.2
+        restart: unless-stopped
+        env_file: ./.env
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=$MONGODB_USER
+            - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_PASSWORD
+        ports:
+            - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+        volumes:
+            - db:/data/db
+        networks:
+            - backend
+
+    server:
+        depends_on:
+            - mongodb
+        build: ./server
+        restart: unless-stopped
+        env_file: ./.env
+        ports:
+            - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+        environment:
+            - DB_HOST=mongodb
+            - DB_USER=$MONGODB_USER
+            - DB_PASSWORD=$MONGODB_PASSWORD
+            - DB_NAME=$MONGODB_DATABASE
+            - DB_PORT=$MONGODB_DOCKER_PORT
+            - CLIENT_ORIGIN=$CLIENT_ORIGIN
+        networks:
+            - backend
+            - frontend
+
+    client:
+        depends_on:
+            - server
+        build:
+            context: ./client
+            args:
+                - REACT_APP_API_BASE_URL=$CLIENT_API_BASE_URL
+        ports:
+            - $REACT_LOCAL_PORT:$REACT_DOCKER_PORT
+        networks:
+            - frontend
+
+volumes:
+    db:
+
+networks:
+    backend:
+    frontend:
