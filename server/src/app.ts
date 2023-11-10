@@ -6,7 +6,7 @@ import api from "./routes/v1";
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:8081" }));
+app.use(cors({ origin: process.env.CLIENT_ORIGIN || "http://localhost:8000" }));
 
 app.use(express.json());
 
