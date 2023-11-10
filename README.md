@@ -8,7 +8,7 @@ The services can be run on the background with command:
 docker-compose up -d
 ```
 
-Navgigate to
+Navigate to
 `http://127.0.0.1:8000`
 
 ## Stop the System
